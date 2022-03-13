@@ -6,7 +6,7 @@
 [X] As a player, I want to see which quantity of which item I have
 [X] As a player, I want to gain minerals when mining, so I can use my resources later
 [X] As a player, I want to gain level when I reach a certain amount of experience in a skill
-[ ] As a player, I want to sell minerals so I can make money
+[X] As a player, I want to sell minerals so I can make money
 [ ] As a player, I want to use my money to buy items
 [ ] As a player, I want to use my ore to produce metal bars
 [ ] As a player, I want to use my ore metal bars to product mech chassis

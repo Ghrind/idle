@@ -2,6 +2,7 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import reduceReducers from 'reduce-reducers';
 import tickerReducer from './features/tickerSlice'
 import pilotActionsReducer from './features/pilotActionsSlice'
+import inventoryReducer from './features/inventorySlice'
 
 import {
   persistStore,
@@ -37,8 +38,9 @@ const initialState = {
     ticksPerSeconds: 1,
   },
   inventory: {
+    money: 0,
     items: {
-      token: { name: 'Strange Token', quantity: 2 }
+      'items.strangetoken': { name: 'Strange Token', quantity: 2 }
     }
   },
   pilotActions: {
@@ -55,7 +57,7 @@ const initialState = {
   }
 }
 
-const reducer = reduceReducers(initialState, tickerReducer, pilotActionsReducer)
+const reducer = reduceReducers(initialState, tickerReducer, pilotActionsReducer, inventoryReducer)
 
 const store = configureStore({
   reducer: persistReducer(persistConfig, reducer),
