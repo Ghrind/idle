@@ -1,0 +1,9 @@
+.SkillsList {
+}
+
+.SkillsListEntry {
+}
+
+.SkillsListEntry.active {
+  font-weight: bold;
+}
