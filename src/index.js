@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './store'
@@ -10,6 +9,7 @@ import { run, consume } from './features/tickerSlice'
 import { doAction } from './features/pilotActionsSlice'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Mining from './routes/skills/mining'
+import Vault from './routes/vault'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,6 +18,7 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route path="skills/mining" element={<Mining />} />
+            <Route path="vault" element={<Vault />} />
           </Route>
         </Routes>
       </BrowserRouter>

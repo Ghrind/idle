@@ -1,7 +1,7 @@
 import React from 'react';
 import Redux from 'react-redux';
 import { useDispatch, useSelector } from 'react-redux'
-import { List, Header, Button } from 'semantic-ui-react'
+import { Menu, Dropdown } from 'semantic-ui-react'
 import { itemsData, getItemData } from './itemsData'
 import { sellItem } from './features/inventorySlice'
 
@@ -12,10 +12,11 @@ export function InventoryEntry(props) {
   const sell =  () => { dispatch(sellItem({ itemCode: props.code, quantity: props.quantity })) }
 
   return (
-    <List.Item>
-      {name} ({props.quantity})
-      <Button onClick={sell}>Sell All ({price}$)</Button>
-    </List.Item>
+    <Dropdown item text={`${name} (${props.quantity})`}>
+      <Dropdown.Menu>
+        <Dropdown.Item onClick={sell} text={`Sell All (${price}$)`} /> 
+      </Dropdown.Menu>
+    </Dropdown>
   );
 }
 
@@ -25,12 +26,16 @@ export function Inventory() {
   const listItems = Object.entries(items).map(([key, value]) => <InventoryEntry key={key} code={key} quantity={value.quantity} />)
 
   return (
-    <div className="Inventory">
-      <Header as="h3">Inventory</Header>
-      <p>Money: {money}$</p>
-      <List celled>
-        {listItems}
-      </List>
-    </div>
+    <Menu vertical>
+      <Menu.Item>
+        Money: {money}$
+      </Menu.Item>
+      <Menu.Item>
+        Items
+        <Menu.Menu>
+          {listItems}
+        </Menu.Menu>
+      </Menu.Item>
+    </Menu>
   );
 }
