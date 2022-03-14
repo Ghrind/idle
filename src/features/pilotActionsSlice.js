@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { addToInventory, removeFromInventory } from '../inventoryUtils'
 import { updateSkillLevel, stopTraining } from '../skillsUtils'
 import { itemsData } from '../itemsData'
+import { pilotActionsData } from '../pilotActionsData'
 
 export const pilotActionsSlice = createSlice({
   name: 'pilotActions',
@@ -11,10 +12,11 @@ export const pilotActionsSlice = createSlice({
       state.skills.active = action.payload.split('.')[0]
       state.ticker.ticks = 0
       state.ticker.timeLastChecked = Math.floor(Date.now() / 1000)
+      state.ticker.message = null
     },
     doAction: (state, action) => {
       const actionName = state.pilotActions.active
-      const pilotAction = state.pilotActions.actions[actionName]
+      const pilotAction = pilotActionsData[actionName]
       if (pilotAction === undefined ) {
         return
       }
@@ -50,11 +52,6 @@ export const pilotActionsSlice = createSlice({
 
 
 function canPerformAction(state, pilotAction) {
-  // Enougth time
-  if (pilotAction.ticksPerAction >= state.ticker.ticks) {
-    return false
-  }
-
   // Enough resources
   if (pilotAction.inputItems !== undefined) {
     for (var i = 0; i < pilotAction.inputItems.length; i++) {
@@ -63,10 +60,15 @@ function canPerformAction(state, pilotAction) {
       const quantityInInventory = state.inventory.items[itemCode] !== undefined ? state.inventory.items[itemCode].quantity : 0
 
       if (requiredQuantity > quantityInInventory) {
-        stopTraining(state, 'Not enough ' + itemsData[itemCode].name)
+        stopTraining(state, pilotAction.name + ': Not enough ' + itemsData[itemCode].name)
         return false
       }
     }
+  }
+
+  // Enougth time
+  if (pilotAction.ticksPerAction >= state.ticker.ticks) {
+    return false
   }
 
   return true

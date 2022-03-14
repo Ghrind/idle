@@ -45,25 +45,6 @@ const initialState = {
   },
   pilotActions: {
     active: '',
-    actions: {
-      'mining.iron': {
-        outputItems: [
-          { code: 'items.ironore', quantity: 1 }
-        ],
-        ticksPerAction: 3,
-        xp: 5,
-      },
-      'smelting.iron': {
-        inputItems: [
-          { code: 'items.ironore', quantity: 2 }
-        ],
-        outputItems: [
-          { code: 'items.ironbar', quantity: 1 }
-        ],
-        ticksPerAction: 2,
-        xp: 7,
-      },
-    }
   }
 }
 

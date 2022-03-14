@@ -42,6 +42,7 @@ function mapSkillsToValue(value) {
 
 export function stopTraining(state, message) {
   state.skills.active = null
+  state.pilotActions.active = null
   state.ticker.ticks = 0
   state.ticker.message = message
 }
