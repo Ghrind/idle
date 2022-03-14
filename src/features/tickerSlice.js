@@ -10,6 +10,11 @@ export const tickerSlice = createSlice({
       }
     },
     run: (state, action) => {
+      const isActiveTraining = state.skills.active !== null
+      if (!isActiveTraining) {
+        return
+      }
+
       const currentTime = Math.floor(Date.now() / 1000)
       if (state.ticker.running) {
         state.ticker.ticks += (currentTime - state.ticker.timeLastChecked) * state.ticker.ticksPerSeconds

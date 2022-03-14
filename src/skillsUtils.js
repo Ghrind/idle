@@ -39,3 +39,9 @@ function mapSkillsToValue(value) {
   }
   return levels
 }
+
+export function stopTraining(state, message) {
+  state.skills.active = null
+  state.ticker.ticks = 0
+  state.ticker.message = message
+}

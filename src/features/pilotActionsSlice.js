@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { addToInventory, removeFromInventory } from '../inventoryUtils'
-import { updateSkillLevel } from '../skillsUtils'
+import { updateSkillLevel, stopTraining } from '../skillsUtils'
+import { itemsData } from '../itemsData'
 
 export const pilotActionsSlice = createSlice({
   name: 'pilotActions',
@@ -8,6 +9,7 @@ export const pilotActionsSlice = createSlice({
     startPilotAction: (state, action) => {
       state.pilotActions.active = action.payload
       state.skills.active = action.payload.split('.')[0]
+      state.ticker.ticks = 0
       state.ticker.timeLastChecked = Math.floor(Date.now() / 1000)
     },
     doAction: (state, action) => {
@@ -40,8 +42,8 @@ export const pilotActionsSlice = createSlice({
         }
 
         state.ticker.ticks -= pilotAction.ticksPerAction
-
       }
+
     },
   }
 })
@@ -61,6 +63,7 @@ function canPerformAction(state, pilotAction) {
       const quantityInInventory = state.inventory.items[itemCode] !== undefined ? state.inventory.items[itemCode].quantity : 0
 
       if (requiredQuantity > quantityInInventory) {
+        stopTraining(state, 'Not enough ' + itemsData[itemCode].name)
         return false
       }
     }

@@ -26,7 +26,7 @@ const persistConfig = {
 
 const initialState = {
   skills: {
-    active: '',
+    active: null,
     levels: skillsInitialLevels(),
     xp: skillsInitialXP(),
   },

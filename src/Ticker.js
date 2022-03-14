@@ -17,15 +17,15 @@ function TickerButton(props) {
 export default function Ticker() {
   const ticker = useSelector((state) => state.ticker)
   const ticks = useSelector((state) => state.ticker.ticks)
+  const actionName = useSelector((state) => state.skills.active)
 
   return (
     <main>
-      <Header as="h5">Ticker</Header>
+      <Header as="h5">Current action: {actionName}</Header>
+      <Menu.Item>{ticker.message}</Menu.Item>
       <Menu.Item>Ticks <Label>{ticker.ticks}</Label></Menu.Item>
       <Menu.Item>Ticks to process <Label>{ticker.ticksToProcess}</Label></Menu.Item>
-      <Menu.Item>
-        <TickerButton />
-      </Menu.Item>
+      <Menu.Item><TickerButton /></Menu.Item>
     </main>
   );
 }

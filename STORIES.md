@@ -8,6 +8,6 @@
 [X] As a player, I want to gain level when I reach a certain amount of experience in a skill
 [X] As a player, I want to sell minerals so I can make money
 [ ] As a player, I want to use my money to buy items
-[ ] As a player, I want to use my ore to produce metal bars
+[X] As a player, I want to use my ore to produce metal bars
 [ ] As a player, I want to use my ore metal bars to produce mech chassis
 [ ] As a player, I want the breadth of chassis I can build to increase with my skill level
