@@ -22,3 +22,20 @@ export function updateSkillLevel(state, skillCode) {
     updateSkillLevel(state, skillCode)
   }
 }
+
+export function skillsInitialLevels() {
+  return mapSkillsToValue(1)
+}
+
+export function skillsInitialXP() {
+  return mapSkillsToValue(0)
+}
+
+function mapSkillsToValue(value) {
+  var levels = {}
+  const keys = Object.keys(skillsData)
+  for (var i = 0; i < keys.length; i++) {
+    levels[keys[i]] = value
+  }
+  return levels
+}

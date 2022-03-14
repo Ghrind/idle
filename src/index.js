@@ -10,6 +10,7 @@ import { doAction } from './features/pilotActionsSlice'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Mining from './routes/skills/mining'
 import Vault from './routes/vault'
+import Smelting from './routes/skills/smelting'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,6 +19,7 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route path="skills/mining" element={<Mining />} />
+            <Route path="skills/smelting" element={<Smelting />} />
             <Route path="vault" element={<Vault />} />
           </Route>
         </Routes>

@@ -9,5 +9,5 @@
 [X] As a player, I want to sell minerals so I can make money
 [ ] As a player, I want to use my money to buy items
 [ ] As a player, I want to use my ore to produce metal bars
-[ ] As a player, I want to use my ore metal bars to product mech chassis
+[ ] As a player, I want to use my ore metal bars to produce mech chassis
 [ ] As a player, I want the breadth of chassis I can build to increase with my skill level

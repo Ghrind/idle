@@ -3,6 +3,7 @@ import reduceReducers from 'reduce-reducers';
 import tickerReducer from './features/tickerSlice'
 import pilotActionsReducer from './features/pilotActionsSlice'
 import inventoryReducer from './features/inventorySlice'
+import { skillsInitialLevels, skillsInitialXP } from './skillsUtils'
 
 import {
   persistStore,
@@ -25,10 +26,9 @@ const persistConfig = {
 
 const initialState = {
   skills: {
-    levels: { mining: 0, exploration: 0 },
-    names: { mining: 'Mining', exploration: 'Exploration' },
     active: '',
-    xp: { mining: 0, exploration: 0 },
+    levels: skillsInitialLevels(),
+    xp: skillsInitialXP(),
   },
   ticker: {
     ticks: 0,
@@ -52,7 +52,17 @@ const initialState = {
         ],
         ticksPerAction: 3,
         xp: 5,
-      }
+      },
+      'smelting.iron': {
+        inputItems: [
+          { code: 'items.ironore', quantity: 2 }
+        ],
+        outputItems: [
+          { code: 'items.ironbar', quantity: 1 }
+        ],
+        ticksPerAction: 2,
+        xp: 7,
+      },
     }
   }
 }

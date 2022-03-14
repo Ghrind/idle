@@ -10,9 +10,18 @@ export function addToInventory(inventory, itemCode, quantity) {
   }
 }
 
+export function removeFromInventory(inventory, itemCode, quantity) {
+  const quantityInInventory = inventory.items[itemCode] ? inventory.items[itemCode].quantity : 0
+  if (quantityInInventory <= quantity) {
+    delete inventory.items[itemCode]
+  } else {
+    inventory.items[itemCode].quantity -= quantity
+  }
+}
+
 export function sellItemFromInventory(inventory, itemCode, quantity) {
   if (inventory.items.itemCode !== undefined ) {
-    return
+    return false
   }
   const item = inventory.items[itemCode]
   const newQuantity = Math.max(0, item.quantity - quantity)

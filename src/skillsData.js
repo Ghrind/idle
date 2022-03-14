@@ -2,9 +2,11 @@ export const skillsData = {
   'mining': {
     progressionFactor: 1.12,
     xpForLevelTwo: 90,
+    name: 'Mining',
   },
-  'exploration': {
-    progressionFactor: 0,
-    xpForLevelTwo: 0,
+  'smelting': {
+    progressionFactor: 1.12,
+    xpForLevelTwo: 90,
+    name: 'Smelting',
   },
 }
