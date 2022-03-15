@@ -1,10 +1,11 @@
 import { Header, Segment, Card } from 'semantic-ui-react'
 import PilotAction from '../../PilotAction'
+import SkillHeader from '../../SkillHeader'
 
 export default function Mining() {
   return (
     <main>
-      <Header as='h1' attached='top'>Mining</Header>
+      <SkillHeader skillCode='mining' />
       <Segment attached>
         <Card.Group>
           <PilotAction code="mining.iron" />

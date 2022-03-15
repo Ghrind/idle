@@ -10,7 +10,6 @@ import { skillsData } from './skillsData'
 export function SkillsListEntry(props) {
   const dispatch = useDispatch()
   const level = useSelector((state) => state.skills.levels[props.skill])
-  //const xp = useSelector((state) => state.skills.xp[props.skill])
   const active = (useSelector((state) => state.skills.active) === props.skill)
 
   return (
@@ -22,8 +21,6 @@ export function SkillsListEntry(props) {
     </Menu.Item>
   );
 }
-
-//({xp}/{xpForLevel(props.skill, level + 1)})
 
 export default function SkillsList() {
   const listItems = Object.entries(skillsData).map(([key, value]) => <SkillsListEntry key={key} skill={key} name={value.name} />)
