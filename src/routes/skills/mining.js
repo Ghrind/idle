@@ -9,6 +9,8 @@ export default function Mining() {
       <Segment attached>
         <Card.Group>
           <PilotAction code="mining.iron" />
+          <PilotAction code="mining.coal" />
+          <PilotAction code="mining.titanium" />
         </Card.Group>
       </Segment>
     </main>

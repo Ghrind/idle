@@ -1,5 +1,7 @@
 export const itemsData = {
   'items.ironore': { name: 'Iron Ore', price: 3 },
+  'items.coal': { name: 'Coal', price: 3 },
+  'items.titaniumore': { name: 'Titanium Ore', price: 3 },
   'items.ironbar': { name: 'Iron Bar', price: 15 },
   'items.strangetoken' : { name: 'Strange Token', price: 1000 },
 }
