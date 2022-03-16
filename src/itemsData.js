@@ -4,6 +4,7 @@ export const itemsData = {
   'items.titaniumore': { name: 'Titanium Ore', price: 3 },
   'items.ironbar': { name: 'Iron Bar', price: 15 },
   'items.strangetoken' : { name: 'Strange Token', price: 1000 },
+  'items.armor.head.iron' : { name: 'Head Iron Armor Plating', price: 30 },
 }
 
 export function getItemData(itemCode) {

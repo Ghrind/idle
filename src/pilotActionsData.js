@@ -43,6 +43,19 @@ export const pilotActionsData = {
     ],
     ticksPerAction: 200,
     xp: 7,
-    level: 1
+    level: 1,
+  },
+  'manufacturing.armor.head.iron': {
+    name: "Forging Iron Armor Plating",
+    skill: 'manufacturing',
+    inputItems: [
+      { code: 'items.ironbar', quantity: 1 },
+    ],
+    outputItems: [
+      { code: 'items.armor.head.iron', quantity: 1 },
+    ],
+    ticksPerAction: 300,
+    xp: 5,
+    level: 1,
   },
 }

@@ -11,6 +11,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Mining from './routes/skills/mining'
 import Vault from './routes/vault'
 import Smelting from './routes/skills/smelting'
+import Manufacturing from './routes/skills/manufacturing'
 import './index.css'
 
 ReactDOM.render(
@@ -21,6 +22,7 @@ ReactDOM.render(
           <Route path="/" element={<App />}>
             <Route path="skills/mining" element={<Mining />} />
             <Route path="skills/smelting" element={<Smelting />} />
+            <Route path="skills/manufacturing" element={<Manufacturing />} />
             <Route path="vault" element={<Vault />} />
           </Route>
         </Routes>
