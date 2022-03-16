@@ -22,7 +22,7 @@ export const pilotActionsData = {
     level: 1,
   },
   'mining.titanium': {
-    name: "Mining Titaniul Ore",
+    name: "Mining Titanium Ore",
     skill: 'mining',
     outputItems: [
       { code: 'items.titaniumore', quantity: 1 }
