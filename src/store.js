@@ -31,11 +31,12 @@ const initialState = {
     xp: skillsInitialXP(),
   },
   ticker: {
-    ticks: 0,
-    ticksToProcess: 0,
-    timeLastChecked: undefined,
-    running: false,
-    ticksPerSeconds: 1,
+    startedAt: null,
+    ticksProcessed: 0,
+    active: false,
+    tickInterval: 10, // 10 milliseconds
+    message: null,
+    ticksToConsume: 0,
   },
   inventory: {
     money: 0,

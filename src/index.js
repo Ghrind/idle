@@ -5,12 +5,13 @@ import reportWebVitals from './reportWebVitals';
 import store from './store'
 import { Provider } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { run, consume } from './features/tickerSlice'
+import { run } from './features/tickerSlice'
 import { doAction } from './features/pilotActionsSlice'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Mining from './routes/skills/mining'
 import Vault from './routes/vault'
 import Smelting from './routes/skills/smelting'
+import './index.css'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -35,7 +36,7 @@ ReactDOM.render(
 reportWebVitals();
 
 
-const tickerRunInterval = 1000;
+const tickerRunInterval = 50;
 
 function tickOnce() {
   store.dispatch(run())

@@ -3,37 +3,24 @@ import { createSlice } from '@reduxjs/toolkit'
 export const tickerSlice = createSlice({
   name: 'ticker',
   reducers: {
-    start: (state, action) => {
-      state.ticker.running = true;
-      if (state.ticker.timeLastChecked === undefined) {
-        state.ticker.timeLastChecked = Math.floor(Date.now() / 1000)
-      }
-    },
     run: (state, action) => {
-      const isActiveTraining = state.skills.active !== null
-      if (!isActiveTraining) {
+      if (!state.ticker.active) {
         return
       }
 
-      const currentTime = Math.floor(Date.now() / 1000)
-      if (state.ticker.running) {
-        state.ticker.ticks += (currentTime - state.ticker.timeLastChecked) * state.ticker.ticksPerSeconds
-        state.ticker.timeLastChecked = currentTime
-        state.ticker.ticksToProcess = 0
-      } else {
-        state.ticker.ticksToProcess = (currentTime - state.ticker.timeLastChecked) * state.ticker.ticksPerSeconds
-      }
+      const currentTime = Date.now()
+      const newTicks = Math.floor((currentTime - state.ticker.startedAt) / state.ticker.tickInterval) - state.ticker.ticksProcessed
+
+      state.ticker.ticksToConsume += newTicks
+      state.ticker.ticksProcessed += newTicks
     },
     stop: (state, action) => {
-      state.ticker.running = false;
+      state.ticker.active = false;
     },
-    consume: (state, action) => {
-      state.ticker.ticks -= action.payload
-    }
   }
 
 })
 
-export const { start, stop, run, consume } = tickerSlice.actions
+export const { start, stop, run } = tickerSlice.actions
 
 export default tickerSlice.reducer

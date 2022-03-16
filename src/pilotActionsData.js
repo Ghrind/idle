@@ -6,7 +6,7 @@ export const pilotActionsData = {
       { code: 'items.ironore', quantity: 1 }
     ],
     inputItems: [],
-    ticksPerAction: 3,
+    ticksPerAction: 300,
     xp: 5,
     level: 1,
   },
@@ -17,7 +17,7 @@ export const pilotActionsData = {
       { code: 'items.coal', quantity: 1 }
     ],
     inputItems: [],
-    ticksPerAction: 2,
+    ticksPerAction: 200,
     xp: 3,
     level: 1,
   },
@@ -28,7 +28,7 @@ export const pilotActionsData = {
       { code: 'items.titaniumore', quantity: 1 }
     ],
     inputItems: [],
-    ticksPerAction: 3,
+    ticksPerAction: 300,
     xp: 10,
     level: 15,
   },
@@ -41,7 +41,7 @@ export const pilotActionsData = {
     outputItems: [
       { code: 'items.ironbar', quantity: 1 }
     ],
-    ticksPerAction: 2,
+    ticksPerAction: 200,
     xp: 7,
     level: 1
   },

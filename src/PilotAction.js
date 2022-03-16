@@ -3,6 +3,7 @@ import { startPilotAction } from './features/pilotActionsSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { pilotActionsData } from './pilotActionsData'
 import { itemsData } from './itemsData'
+import PilotActionProgress from './PilotActionProgress'
 
 function InputOutputItem(props) {
   const name = itemsData[props.code].name
@@ -19,8 +20,9 @@ export default function PilotAction(props) {
   const outputItems = pilotAction.outputItems
   const inputs = inputItems.length == 0 ? '-' : inputItems.map((item) => <InputOutputItem key={item.code} code={item.code} quantity={item.quantity} />)
   const outputs = outputItems.length == 0 ? '-' : outputItems.map((item) => <InputOutputItem key={item.code} code={item.code} quantity={item.quantity} />)
-  const globalPercentProgress = 100 / pilotAction.ticksPerAction * useSelector((state) => state.ticker.ticks)
-  const percentProgress = (props.code === useSelector((state) => state.pilotActions.active)) ? globalPercentProgress : 0
+  const globalPercentProgress = 100 / pilotAction.ticksPerAction * useSelector((state) => state.ticker.ticksToConsume)
+  const active = props.code === useSelector((state) => state.pilotActions.active)
+  const percentProgress = active ? globalPercentProgress : 0
   const locked = pilotAction.level > useSelector((state) => state.skills.levels[pilotAction.skill])
 
   return (
@@ -36,8 +38,8 @@ export default function PilotAction(props) {
         <Card.Description>Produces: {outputs}</Card.Description>
       </Card.Content>
       <Card.Content extra textAlign='center'>
-        <Progress percent={percentProgress} size='tiny' />
-        { locked ? '' : <Button onClick={handleClick}>Start</Button> }
+        <PilotActionProgress code={props.code} />
+        { <Button disabled={locked} onClick={handleClick}>Start</Button> }
       </Card.Content>
     </Card>
   )

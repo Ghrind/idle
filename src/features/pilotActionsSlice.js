@@ -10,9 +10,11 @@ export const pilotActionsSlice = createSlice({
     startPilotAction: (state, action) => {
       state.pilotActions.active = action.payload
       state.skills.active = action.payload.split('.')[0]
-      state.ticker.ticks = 0
-      state.ticker.timeLastChecked = Math.floor(Date.now() / 1000)
+      state.ticker.ticksToConsume = 0
+      state.ticker.ticksProcessed = 0
+      state.ticker.startedAt = Date.now()
       state.ticker.message = null
+      state.ticker.active = true
     },
     doAction: (state, action) => {
       const actionName = state.pilotActions.active
@@ -43,7 +45,7 @@ export const pilotActionsSlice = createSlice({
           }
         }
 
-        state.ticker.ticks -= pilotAction.ticksPerAction
+        state.ticker.ticksToConsume -= pilotAction.ticksPerAction
       }
 
     },
@@ -67,7 +69,7 @@ function canPerformAction(state, pilotAction) {
   }
 
   // Enougth time
-  if (pilotAction.ticksPerAction >= state.ticker.ticks) {
+  if (pilotAction.ticksPerAction >= state.ticker.ticksToConsume) {
     return false
   }
 
