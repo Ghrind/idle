@@ -7,7 +7,8 @@ export default function SkillHeader(props) {
   const level = useSelector((state) => state.skills.levels[props.skillCode])
   const xp = useSelector((state) => state.skills.xp[props.skillCode])
   const nextXP = xpForLevel(props.skillCode, level + 1)
-  const xpPercentage = Math.round((100 / nextXP * xp) * 100, 2) / 100
+  const lastXP = level == 1 ? 0 : xpForLevel(props.skillCode, level)
+  const xpPercentage = Math.round((100 / (nextXP - lastXP) * (xp - lastXP)) * 100, 2) / 100
   const skillName = skillsData[props.skillCode].name
 
   return (
