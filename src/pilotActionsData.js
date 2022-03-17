@@ -17,8 +17,8 @@ export const pilotActionsData = {
       { code: 'items.coal', quantity: 1 }
     ],
     inputItems: [],
-    ticksPerAction: 200,
-    xp: 3,
+    ticksPerAction: 300,
+    xp: 8,
     level: 1,
   },
   'mining.titanium': {
@@ -44,6 +44,20 @@ export const pilotActionsData = {
     ticksPerAction: 200,
     xp: 7,
     level: 1,
+  },
+  'smelting.steel': {
+    name: "Smelting Steel Bar",
+    skill: 'smelting',
+    inputItems: [
+      { code: 'items.ironore', quantity: 1 },
+      { code: 'items.coal', quantity: 1 }
+    ],
+    outputItems: [
+      { code: 'items.steelbar', quantity: 1 }
+    ],
+    ticksPerAction: 200,
+    xp: 12,
+    level: 5,
   },
   'manufacturing.armor.head.iron': {
     name: "Forging Iron Armor Plating",

@@ -9,6 +9,7 @@ export default function Smelting() {
       <Segment attached>
         <Card.Group>
           <PilotAction code="smelting.iron" />
+          <PilotAction code="smelting.steel" />
         </Card.Group>
       </Segment>
     </main>
