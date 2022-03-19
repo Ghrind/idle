@@ -63,6 +63,14 @@ export const pilotActionsSlice = createSlice({
           const attackOutcome = performAttack(attacker, target)
 
           target.hp.current -= attackOutcome.damageDealt
+
+          if (attackOutcome.targetStatus == 'dead') {
+            // Reset all tickers
+            state.ticker.active = false
+
+            // Reset enemy
+            // Restart combat
+          }
         }
 
         state.ticker.ticksToConsume -= state.ticker.ticksPerAction
