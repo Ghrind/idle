@@ -4,6 +4,7 @@ import { updateSkillLevel, stopTraining } from '../skillsUtils'
 import { itemsData } from '../itemsData'
 import { getPilotActionData } from '../pilotActionsData'
 import { performAttack } from '../combatUtils'
+import { prepareForCombat } from '../combatUtils'
 
 export const pilotActionsSlice = createSlice({
   name: 'pilotActions',
@@ -65,11 +66,9 @@ export const pilotActionsSlice = createSlice({
           target.hp.current -= attackOutcome.damageDealt
 
           if (attackOutcome.targetStatus == 'dead') {
-            // Reset all tickers
             state.ticker.active = false
-
-            // Reset enemy
-            // Restart combat
+            prepareForCombat(state, 'devourer')
+            state.ticker.active = true
           }
         }
 
