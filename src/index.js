@@ -10,7 +10,7 @@ import { doAction } from './features/pilotActionsSlice'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Mining from './routes/skills/mining'
 import Vault from './routes/vault'
-import Smelting from './routes/skills/smelting'
+import Forging from './routes/skills/forging'
 import Manufacturing from './routes/skills/manufacturing'
 import './index.css'
 
@@ -21,7 +21,7 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route path="skills/mining" element={<Mining />} />
-            <Route path="skills/smelting" element={<Smelting />} />
+            <Route path="skills/forging" element={<Forging />} />
             <Route path="skills/manufacturing" element={<Manufacturing />} />
             <Route path="vault" element={<Vault />} />
           </Route>

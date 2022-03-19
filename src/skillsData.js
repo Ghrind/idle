@@ -4,10 +4,10 @@ export const skillsData = {
     xpForLevelTwo: 90,
     name: 'Mining',
   },
-  'smelting': {
+  'forging': {
     progressionFactor: 1.12,
     xpForLevelTwo: 90,
-    name: 'Smelting',
+    name: 'Forging',
   },
   'manufacturing': {
     progressionFactor: 1.12,

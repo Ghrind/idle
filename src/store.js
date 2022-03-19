@@ -42,7 +42,8 @@ const initialState = {
   inventory: {
     money: 0,
     items: {
-      'items.strangetoken': { name: 'Strange Token', quantity: 2 }
+      'items.chassis.squire': { quantity: 1},
+      'items.misc.strangetoken': { quantity: 2 },
     }
   },
   pilotActions: {
