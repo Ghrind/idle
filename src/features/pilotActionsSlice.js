@@ -3,6 +3,7 @@ import { addToInventory, removeFromInventory } from '../inventoryUtils'
 import { updateSkillLevel, stopTraining } from '../skillsUtils'
 import { itemsData } from '../itemsData'
 import { getPilotActionData } from '../pilotActionsData'
+import { performAttack } from '../combatUtils'
 
 export const pilotActionsSlice = createSlice({
   name: 'pilotActions',
@@ -59,7 +60,9 @@ export const pilotActionsSlice = createSlice({
           const attacker = state.pilot
           const target = state.enemy
 
-          target.hp.current -= 5
+          const attackOutcome = performAttack(attacker, target)
+
+          target.hp.current -= attackOutcome.damageDealt
         }
 
         state.ticker.ticksToConsume -= state.ticker.ticksPerAction

@@ -19,9 +19,9 @@ function CombatStats(props) {
         <List>
           { hasShield ? <List.Item>Shield: {props.actor.shield.current}/{props.actor.shield.max}</List.Item> : '' }
           { hasHp ? <List.Item>HP: {props.actor.hp.current}/{props.actor.hp.max}</List.Item> : '' }
-          <List.Item>Accuracy (melee/rampage): {props.actor.meleeAccuracy.current}</List.Item>
+          <List.Item>Accuracy (melee/rampage): {props.actor.accuracy.current}</List.Item>
           <List.Item>Evasion: {props.actor.evasion.current}</List.Item>
-          <List.Item>Damage: {17}-{37}</List.Item>
+          <List.Item>Damage: {props.actor.minDamage.current}-{props.actor.maxDamage.current}</List.Item>
         </List>
       </Container>
       { props.pilot ? <PilotActionProgress code='combat' attached='bottom' /> : <Progress attached='bottom' percent={enemyProgress} color='yellow' /> }
