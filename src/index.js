@@ -7,11 +7,13 @@ import { Provider } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { run } from './features/tickerSlice'
 import { doAction } from './features/pilotActionsSlice'
+import { enemyAttack } from './features/combatSlice'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Mining from './routes/skills/mining'
 import Vault from './routes/vault'
 import Smelting from './routes/skills/smelting'
 import Manufacturing from './routes/skills/manufacturing'
+import Combat from './routes/combat'
 import './index.css'
 
 ReactDOM.render(
@@ -23,6 +25,7 @@ ReactDOM.render(
             <Route path="skills/mining" element={<Mining />} />
             <Route path="skills/smelting" element={<Smelting />} />
             <Route path="skills/manufacturing" element={<Manufacturing />} />
+            <Route path="combat" element={<Combat />} />
             <Route path="vault" element={<Vault />} />
           </Route>
         </Routes>
@@ -43,6 +46,7 @@ const tickerRunInterval = 50;
 function tickOnce() {
   store.dispatch(run())
   store.dispatch(doAction())
+  store.dispatch(enemyAttack())
 
   setTimeout(() => {
     tickOnce();

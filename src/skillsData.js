@@ -14,4 +14,10 @@ export const skillsData = {
     xpForLevelTwo: 90,
     name: 'Manufacturing',
   },
+  'combat.melee': {
+    progressionFactor: 1.12,
+    xpForLevelTwo: 90,
+    name: 'Melee Combat',
+    combat: true,
+  },
 }

@@ -24,22 +24,28 @@ export const pilotActionsSlice = createSlice({
         return
       }
 
-      const actionName = state.pilotActions.active
-      const pilotAction = getPilotActionData(actionName)
+      const actionCode = state.pilotActions.active
+      const pilotAction = getPilotActionData(actionCode)
+
+      const skillCode = actionCode === 'combat' ? 'combat.melee' : actionCode.split('.')[0]
 
       while (canPerformAction(state, pilotAction)) {
-        const skillCode = actionName.split('.')[0]
 
+        // Gain XP
         state.skills.xp[skillCode] += pilotAction.xp
         updateSkillLevel(state, skillCode)
 
-        for (var i = 0; i < pilotAction.outputItems.length; i++) {
-          const itemCode = pilotAction.outputItems[i].code
-          const quantity = pilotAction.outputItems[i].quantity
+        // Produce items
+        if (pilotAction.outputItems !== undefined) {
+          for (var i = 0; i < pilotAction.outputItems.length; i++) {
+            const itemCode = pilotAction.outputItems[i].code
+            const quantity = pilotAction.outputItems[i].quantity
 
-          addToInventory(state.inventory, itemCode, quantity)
+            addToInventory(state.inventory, itemCode, quantity)
+          }
         }
 
+        // Consume items
         if (pilotAction.inputItems !== undefined) {
           for (var i = 0; i < pilotAction.inputItems.length; i++) {
             const itemCode = pilotAction.inputItems[i].code
@@ -49,9 +55,15 @@ export const pilotActionsSlice = createSlice({
           }
         }
 
+        if (skillCode === 'combat.melee') {
+          const attacker = state.pilot
+          const target = state.enemy
+
+          target.hp.current -= 5
+        }
+
         state.ticker.ticksToConsume -= state.ticker.ticksPerAction
       }
-
     },
   }
 })

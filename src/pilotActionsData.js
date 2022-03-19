@@ -1,4 +1,7 @@
 export const pilotActionsData = {
+  'combat': {
+    name: 'in Combat',
+  },
   'mining.iron': {
     name: "Mining Iron Ore",
     skill: 'mining',

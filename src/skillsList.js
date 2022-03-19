@@ -31,9 +31,10 @@ export default function SkillsList() {
     <Menu vertical>
       <Menu.Item>
         <Label>{inventorySlotsCount}</Label>
-        <Link to={ `/vault` }>
-          Vault
-        </Link>
+        <Link to={ `/vault` }>Vault</Link>
+      </Menu.Item>
+      <Menu.Item>
+        <Link active={active === 'combat' ? 'active' : ''} to={ `/combat` }>Combat</Link>
       </Menu.Item>
       <Menu.Item>
         Skills

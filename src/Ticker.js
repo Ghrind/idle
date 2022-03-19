@@ -16,7 +16,7 @@ export default function Ticker() {
     <main>
       <Header as='h5'>Currently {title}</Header>
       <Menu.Item>
-        { pilotAction === undefined ? ticker.message : <PilotActionProgress code={pilotActionCode} /> }
+        { pilotAction === undefined ? ticker.message : <PilotActionProgress code={pilotAction.combat ? 'combat' : pilotActionCode} /> }
       </Menu.Item>
       <Menu.Item>Started At: {ticker.startedAt}</Menu.Item>
     </main>

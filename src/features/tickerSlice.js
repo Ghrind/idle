@@ -13,6 +13,8 @@ export const tickerSlice = createSlice({
 
       state.ticker.ticksToConsume += newTicks
       state.ticker.ticksProcessed += newTicks
+
+      state.ticker.enemy.ticksToConsume += newTicks
     },
     stop: (state, action) => {
       state.ticker.active = false;
