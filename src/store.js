@@ -5,25 +5,6 @@ import pilotActionsReducer from './features/pilotActionsSlice'
 import inventoryReducer from './features/inventorySlice'
 import { skillsInitialLevels, skillsInitialXP } from './skillsUtils'
 
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from 'redux-persist'
-
-
-import storage from 'redux-persist/lib/storage'
-
-const persistConfig = {
-  key: 'root',
-  storage
-}
-
 const initialState = {
   skills: {
     active: null,
@@ -53,14 +34,7 @@ const initialState = {
 const reducer = reduceReducers(initialState, tickerReducer, pilotActionsReducer, inventoryReducer)
 
 const store = configureStore({
-  reducer: persistReducer(persistConfig, reducer),
-  middleware: getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  })
+  reducer: reducer,
 })
-
-export const persistor  = persistStore(store)
 
 export default store
