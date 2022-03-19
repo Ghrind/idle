@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux'
 import { pilotActionsData } from './pilotActionsData'
 
 export default function PilotActionProgress(props) {
-  const pilotAction = pilotActionsData[props.code]
-  const globalPercentProgress = 100 / pilotAction.ticksPerAction * useSelector((state) => state.ticker.ticksToConsume)
+  const ticker = useSelector((state) => state.ticker)
+  const globalPercentProgress = 100 / ticker.ticksPerAction * ticker.ticksToConsume
   const active = props.code === useSelector((state) => state.pilotActions.active)
   const percentProgress = active ? globalPercentProgress : 0
 
   return (
-    <Progress color='yellow' percent={percentProgress} size='tiny' />
+    <Progress color='yellow' attached={props.attached} percent={percentProgress} size='tiny' />
   )
 }

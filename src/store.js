@@ -37,6 +37,7 @@ const initialState = {
     tickInterval: 10, // 10 milliseconds
     message: null,
     ticksToConsume: 0,
+    ticksPerAction: 0,
   },
   inventory: {
     money: 0,

@@ -2,26 +2,30 @@ import { createSlice } from '@reduxjs/toolkit'
 import { addToInventory, removeFromInventory } from '../inventoryUtils'
 import { updateSkillLevel, stopTraining } from '../skillsUtils'
 import { itemsData } from '../itemsData'
-import { pilotActionsData } from '../pilotActionsData'
+import { getPilotActionData } from '../pilotActionsData'
 
 export const pilotActionsSlice = createSlice({
   name: 'pilotActions',
   reducers: {
     startPilotAction: (state, action) => {
+      state.ticker.active = false
       state.pilotActions.active = action.payload
       state.skills.active = action.payload.split('.')[0]
       state.ticker.ticksToConsume = 0
       state.ticker.ticksProcessed = 0
       state.ticker.startedAt = Date.now()
       state.ticker.message = null
+      state.ticker.ticksPerAction = getPilotActionData(state.pilotActions.active).ticksPerAction
       state.ticker.active = true
     },
     doAction: (state, action) => {
-      const actionName = state.pilotActions.active
-      const pilotAction = pilotActionsData[actionName]
-      if (pilotAction === undefined ) {
+      // Action must have a ticksPerAction > 0 to avoid infinite loop
+      if (state.ticker.ticksPerAction <= 0) {
         return
       }
+
+      const actionName = state.pilotActions.active
+      const pilotAction = getPilotActionData(actionName)
 
       while (canPerformAction(state, pilotAction)) {
         const skillCode = actionName.split('.')[0]
@@ -45,7 +49,7 @@ export const pilotActionsSlice = createSlice({
           }
         }
 
-        state.ticker.ticksToConsume -= pilotAction.ticksPerAction
+        state.ticker.ticksToConsume -= state.ticker.ticksPerAction
       }
 
     },
@@ -69,7 +73,7 @@ function canPerformAction(state, pilotAction) {
   }
 
   // Enougth time
-  if (pilotAction.ticksPerAction >= state.ticker.ticksToConsume) {
+  if (state.ticker.ticksPerAction >= state.ticker.ticksToConsume) {
     return false
   }
 

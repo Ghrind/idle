@@ -73,3 +73,13 @@ export const pilotActionsData = {
     level: 1,
   },
 }
+
+export function getPilotActionData(pilotActionCode) {
+  const data = pilotActionsData[pilotActionCode]
+
+  if (data === undefined) {
+      throw 'Unkown pilot action with code: "' + pilotActionCode + '"'
+  } else {
+    return data
+  }
+}
