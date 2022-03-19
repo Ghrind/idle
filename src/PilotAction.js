@@ -2,11 +2,11 @@ import { Header, Button, Card, Progress, Label } from 'semantic-ui-react'
 import { startPilotAction } from './features/pilotActionsSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { pilotActionsData } from './pilotActionsData'
-import { itemsData } from './itemsData'
+import { getItemData } from './itemsData'
 import PilotActionProgress from './PilotActionProgress'
 
 function InputOutputItem(props) {
-  const name = itemsData[props.code].name
+  const name = getItemData(props.code).name
   return (
     <Label>{name} ({props.quantity})</Label>
   )
