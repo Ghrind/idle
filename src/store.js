@@ -24,6 +24,7 @@ const initialState = {
       ticksPerAction: 0,
       ticksToConsume: 0,
     },
+    xpPerAction: 0,
   },
   inventory: {
     money: 0,

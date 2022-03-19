@@ -11,13 +11,19 @@ export const pilotActionsSlice = createSlice({
   reducers: {
     startPilotAction: (state, action) => {
       state.ticker.active = false
+
       state.pilotActions.active = action.payload
       state.skills.active = action.payload.split('.')[0]
+
+      const pilotAction = getPilotActionData(state.pilotActions.active)
+
       state.ticker.ticksToConsume = 0
       state.ticker.ticksProcessed = 0
       state.ticker.startedAt = Date.now()
       state.ticker.message = null
-      state.ticker.ticksPerAction = getPilotActionData(state.pilotActions.active).ticksPerAction
+      state.ticker.ticksPerAction = pilotAction.ticksPerAction
+      state.ticker.xp = pilotAction.xp
+
       state.ticker.active = true
     },
     doAction: (state, action) => {
@@ -34,7 +40,7 @@ export const pilotActionsSlice = createSlice({
       while (canPerformAction(state, pilotAction)) {
 
         // Gain XP
-        state.skills.xp[skillCode] += pilotAction.xp
+        state.skills.xp[skillCode] += state.ticker.xpPerAction
         updateSkillLevel(state, skillCode)
 
         // Produce items

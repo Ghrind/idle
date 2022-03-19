@@ -4,6 +4,7 @@ const enemiesData = {
     accuracy: 50,
     minDamage: 10,
     maxDamage: 20,
+    xp: 20,
   },
 }
 

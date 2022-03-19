@@ -37,4 +37,5 @@ export function prepareForCombat(state, enemyCode) {
   state.ticker.enemy.ticksPerAction = 350 // TODO: change me
   state.ticker.startedAt = Date.now()
   state.ticker.message = null
+  state.ticker.xpPerAction = enemyData.xp
 }
