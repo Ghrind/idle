@@ -20,9 +20,7 @@ export default function PilotAction(props) {
   const outputItems = pilotAction.outputItems
   const inputs = inputItems.length == 0 ? '-' : inputItems.map((item) => <InputOutputItem key={item.code} code={item.code} quantity={item.quantity} />)
   const outputs = outputItems.length == 0 ? '-' : outputItems.map((item) => <InputOutputItem key={item.code} code={item.code} quantity={item.quantity} />)
-  const globalPercentProgress = 100 / pilotAction.ticksPerAction * useSelector((state) => state.ticker.ticksToConsume)
   const active = props.code === useSelector((state) => state.pilotActions.active)
-  const percentProgress = active ? globalPercentProgress : 0
   const locked = pilotAction.level > useSelector((state) => state.skills.levels[pilotAction.skill])
 
   return (
