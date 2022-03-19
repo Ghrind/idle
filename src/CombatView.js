@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Segment, Progress, Label, Container, Header, List, Button } from 'semantic-ui-react'
-import { startCombat } from './features/combatSlice'
+import { startCombat} from './features/combatSlice'
 import PilotActionProgress from './PilotActionProgress'
+import { stopAction } from './features/pilotActionsSlice'
 
 function CombatStats(props) {
   const hasHp = props.actor.hp !== undefined
@@ -33,12 +34,14 @@ export default function CombatView(props) {
   const pilot = useSelector((state) => state.pilot)
   const enemy = useSelector((state) => state.enemy)
   const dispatch = useDispatch()
-  const handleClick = () => { dispatch(startCombat({ enemy: 'devourer' })) }
+  const handleStart = () => { dispatch(startCombat({ enemy: 'devourer' })) }
+  const handleStop = () => { dispatch(stopAction()) }
+  const inCombat = useSelector((state) => state.skills.active) === 'combat'
   return(
     <main>
       <CombatStats pilot actor={pilot} />
-      <CombatStats actor={enemy} />
-      <Button onClick={handleClick}>Start</Button>
+      { enemy === null ? '' : <CombatStats actor={enemy} /> }
+      { inCombat ? <Button onClick={handleStop}>Stop</Button> : <Button onClick={handleStart}>Start</Button> }
     </main>
   )
 }

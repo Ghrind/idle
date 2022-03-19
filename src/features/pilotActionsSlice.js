@@ -3,8 +3,8 @@ import { addToInventory, removeFromInventory } from '../inventoryUtils'
 import { updateSkillLevel, stopTraining } from '../skillsUtils'
 import { itemsData } from '../itemsData'
 import { getPilotActionData } from '../pilotActionsData'
-import { performAttack } from '../combatUtils'
-import { prepareForCombat } from '../combatUtils'
+import { performAttack, prepareForCombat } from '../combatUtils'
+import { stopPilotAction } from '../pilotActionsUtils'
 
 export const pilotActionsSlice = createSlice({
   name: 'pilotActions',
@@ -25,6 +25,9 @@ export const pilotActionsSlice = createSlice({
       state.ticker.xp = pilotAction.xp
 
       state.ticker.active = true
+    },
+    stopAction: (state, action) => {
+      stopPilotAction(state, 'Action cancelled by pilot')
     },
     doAction: (state, action) => {
       // Action must have a ticksPerAction > 0 to avoid infinite loop
@@ -108,6 +111,6 @@ function canPerformAction(state, pilotAction) {
   return true
 }
 
-export const { startPilotAction, doAction } = pilotActionsSlice.actions
+export const { startPilotAction, doAction, stopAction } = pilotActionsSlice.actions
 
 export default pilotActionsSlice.reducer

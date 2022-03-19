@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { prepareForCombat } from '../combatUtils'
+import { prepareForCombat, performAttack } from '../combatUtils'
+import { stopPilotAction } from '../pilotActionsUtils'
 
 export const CombatSlice = createSlice({
   name: 'Combat',
@@ -14,9 +15,15 @@ export const CombatSlice = createSlice({
         const attacker = state.enemy
         const target = state.pilot
 
-        target.shield.current -= 5
+        const attackOutcome = performAttack(attacker, target)
 
-        state.ticker.enemy.ticksToConsume -= state.ticker.enemy.ticksPerAction
+        state.pilot.shield.current -= attackOutcome.damageDealt
+
+        if (attackOutcome.targetStatus === 'shield-depleted') {
+          stopPilotAction(state, 'Shield depleted during combat')
+        } else {
+          state.ticker.enemy.ticksToConsume -= state.ticker.enemy.ticksPerAction
+        }
       }
     },
   }

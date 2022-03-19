@@ -11,7 +11,11 @@ export function performAttack(attacker, target) {
   outcome.damageDealt = rollMinMax(attacker.minDamage.current, attacker.maxDamage.current)
 
   // Target status
-  outcome.targetStatus = outcome.damageDealt >= target.hp.current ? 'dead' : 'alive'
+  if (target.shield === undefined) {
+    outcome.targetStatus = outcome.damageDealt >= target.hp.current ? 'dead' : 'alive'
+  } else {
+    outcome.targetStatus = outcome.damageDealt >= target.shield.current ? 'shield-depleted' : 'alive'
+  }
 
   return outcome
 }
@@ -20,6 +24,7 @@ export function prepareForCombat(state, enemyCode) {
   const enemyData = getEnemyData(enemyCode)
 
   // Enemy
+  state.enemy = {}
   state.enemy.hp = { base: enemyData.hp, max: enemyData.hp, current: enemyData.hp }
   state.enemy.accuracy = { base: enemyData.accuracy, max: enemyData.accuracy, current: enemyData.accuracy }
   state.enemy.evasion = { base: enemyData.evasion, max: enemyData.evasion, current: enemyData.evasion }
