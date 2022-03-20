@@ -5,6 +5,8 @@ import pilotActionsReducer from './features/pilotActionsSlice'
 import inventoryReducer from './features/inventorySlice'
 import { skillsInitialLevels, skillsInitialXP } from './skillsUtils'
 import combatReducer from './features/combatSlice'
+import { gameData } from './gameData'
+import { makeStat } from './statsUtils'
 
 const initialState = {
   skills: {
@@ -34,12 +36,12 @@ const initialState = {
   },
   pilot: {
     name: 'Ardum',
-    shield: { base: 50, max: 50, current: 50 },
-    accuracy: { base: 50, max: 50, current: 50 },
-    evasion: { base: 50, max: 50, current: 50 },
-    attackSpeed: { base: 3, max: 3, current: 3 },
-    minDamage: { base: 17, max: 17, current: 17 },
-    maxDamage: { base: 32, max: 32, current: 32 },
+    shield: makeStat(gameData.playerDefaultValues.shield),
+    accuracy: makeStat(gameData.playerDefaultValues.accuracy),
+    evasion: makeStat(gameData.playerDefaultValues.evasion),
+    attackSpeed: makeStat(gameData.playerDefaultValues.attackSpeed),
+    minDamage: makeStat(gameData.playerDefaultValues.minDamage),
+    maxDamage: makeStat(gameData.playerDefaultValues.maxDamage),
 
   },
   enemy: {
