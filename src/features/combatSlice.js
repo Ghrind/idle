@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { prepareForCombat, performAttack } from '../combatUtils'
 import { stopPilotAction } from '../pilotActionsUtils'
+import { GameData } from '../gameData.js'
 
 export const CombatSlice = createSlice({
   name: 'Combat',
@@ -21,6 +22,7 @@ export const CombatSlice = createSlice({
 
         if (attackOutcome.targetStatus === 'shield-depleted') {
           stopPilotAction(state, 'Shield depleted during combat')
+          state.pilot.shield.current = Math.floor(state.pilot.shield.max / 100 * GameData['shieldPercentageAfterDeath'])
         } else {
           state.ticker.enemy.ticksToConsume -= state.ticker.enemy.ticksPerAction
         }
