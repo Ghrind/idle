@@ -72,7 +72,9 @@ export const pilotActionsSlice = createSlice({
 
           const attackOutcome = performAttack(attacker, target)
 
-          target.hp.current -= attackOutcome.damageDealt
+          if (attackOutcome.isHit) {
+            target.hp.current -= attackOutcome.damageDealt
+          }
 
           if (attackOutcome.targetStatus == 'dead') {
             state.ticker.active = false

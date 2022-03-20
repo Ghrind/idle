@@ -1,14 +1,18 @@
-import { rollMinMax } from './gameUtils'
+import { rollMinMax, rollPercentage } from './gameUtils'
+import { chanceToHit} from './gameMaths'
 import { getEnemyData } from './enemiesData'
 
 export function performAttack(attacker, target) {
   var outcome = {}
 
   // Check for a hit
+  const currentChanceToHit = chanceToHit(attacker.accuracy.current, target.evasion.current)
+  outcome.isHit = rollPercentage(currentChanceToHit)
 
-
-  // Roll for damage
-  outcome.damageDealt = rollMinMax(attacker.minDamage.current, attacker.maxDamage.current)
+  if (outcome.isHit) {
+    // Roll for damage
+    outcome.damageDealt = rollMinMax(attacker.minDamage.current, attacker.maxDamage.current)
+  }
 
   // Target status
   if (target.shield === undefined) {

@@ -18,7 +18,9 @@ export const CombatSlice = createSlice({
 
         const attackOutcome = performAttack(attacker, target)
 
-        state.pilot.shield.current -= attackOutcome.damageDealt
+        if (attackOutcome.isHit) {
+          state.pilot.shield.current -= attackOutcome.damageDealt
+        }
 
         if (attackOutcome.targetStatus === 'shield-depleted') {
           stopPilotAction(state, 'Shield depleted during combat')

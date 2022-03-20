@@ -3,6 +3,7 @@ import { Segment, Progress, Label, Container, Header, List, Button } from 'seman
 import { startCombat} from './features/combatSlice'
 import PilotActionProgress from './PilotActionProgress'
 import { stopAction } from './features/pilotActionsSlice'
+import { chanceToHit } from './gameMaths'
 
 function CombatStats(props) {
   const hasHp = props.actor.hp !== undefined
@@ -20,7 +21,7 @@ function CombatStats(props) {
         <List>
           { hasShield ? <List.Item>Shield: {props.actor.shield.current}/{props.actor.shield.max}</List.Item> : '' }
           { hasHp ? <List.Item>HP: {props.actor.hp.current}/{props.actor.hp.max}</List.Item> : '' }
-          <List.Item>Accuracy (melee/rampage): {props.actor.accuracy.current}</List.Item>
+          <List.Item>Accuracy (melee/rampage): {props.actor.accuracy.current} ({props.target === undefined ? '' : chanceToHit(props.actor.accuracy.current, props.target.evasion.current)})</List.Item>
           <List.Item>Evasion: {props.actor.evasion.current}</List.Item>
           <List.Item>Damage: {props.actor.minDamage.current}-{props.actor.maxDamage.current}</List.Item>
         </List>
@@ -40,7 +41,7 @@ export default function CombatView(props) {
   return(
     <main>
       <CombatStats pilot actor={pilot} />
-      { enemy === null ? '' : <CombatStats actor={enemy} /> }
+      { enemy === null ? '' : <CombatStats actor={enemy} target={pilot} /> }
       { inCombat ? <Button onClick={handleStop}>Stop</Button> : <Button onClick={handleStart}>Start</Button> }
     </main>
   )

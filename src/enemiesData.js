@@ -1,10 +1,11 @@
 const enemiesData = {
   'devourer': {
     name: 'Devourer',
-    hp: 100,
+    hp: 20,
     accuracy: 50,
-    minDamage: 10,
-    maxDamage: 20,
+    minDamage: 1,
+    maxDamage: 5,
+    evasion: 30,
     xp: 20,
   },
 }
