@@ -1,5 +1,6 @@
 const enemiesData = {
   'devourer': {
+    name: 'Devourer',
     hp: 100,
     accuracy: 50,
     minDamage: 10,

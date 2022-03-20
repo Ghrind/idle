@@ -44,14 +44,7 @@ const initialState = {
     maxDamage: makeStat(gameData.playerDefaultValues.maxDamage),
 
   },
-  enemy: {
-    hp: { base: 50, max: 50, current: 50 },
-    accuracy: { base: 50, max: 50, current: 50 },
-    evasion: { base: 50, max: 50, current: 50 },
-    attackSpeed: { base: 3, max: 3, current: 3 },
-    minDamage: { base: 5, max: 5, current: 5 },
-    maxDamage: { base: 12, max: 12, current: 12 },
-  },
+  enemy: null,
   pilotActions: {
     active: '',
   }
