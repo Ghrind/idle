@@ -7,9 +7,9 @@ export const itemsData = {
   'items.strangetoken': { name: 'Strange Token', price: 1000 },
   'items.armor.head.iron': { name: 'Head Iron Armor Plating', price: 30 },
   'items.chassis.basic': { name: 'Basic Chassis', price: 100, slot: 'chassis' },
-  'items.chassis.advanced': { name: 'Advanced Chassis', price: 100, slot: 'chassis', slots: ['rangedWeapon1'] },
+  'items.chassis.advanced': { name: 'Advanced Chassis', price: 100, slot: 'chassis', slots: ['rangedWeapon1', 'rangedWeapon2'] },
   'items.chassis.prototype': { name: 'Prototype Chassis', price: 100, slot: 'chassis' },
-  'items.weapons.minigun': { name: 'Vulcan VII Minigun', price: 100, slot: 'rangedWeapon1' },
+  'items.weapons.minigun': { name: 'Vulcan VII Minigun', price: 100, slot: 'rangedWeapon' },
 }
 
 export function getItemData(itemCode) {

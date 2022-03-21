@@ -43,9 +43,13 @@ export function itemsForSlot(vaultItems, slot) {
   const codes = Object.keys(vaultItems)
   for (var i=0; i < codes.length; i++) {
     const item = getItemData(codes[i])
-    if (item.slot === slot) {
+    if (item.slot === slotType(slot)) {
       items.push(item)
     }
   }
   return items
+}
+
+export function slotType(slotCode) {
+  return slotCode.replace(/[1-9]$/, '')
 }

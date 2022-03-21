@@ -11,5 +11,6 @@ export const gameData = {
   slots: {
     'chassis': { type: 'chassis', name: 'Chassis'},
     'rangedWeapon1': { type: 'rangedWeapon1', name: 'Ranged Weapon 1'},
+    'rangedWeapon2': { type: 'rangedWeapon2', name: 'Ranged Weapon 2'},
   },
 }

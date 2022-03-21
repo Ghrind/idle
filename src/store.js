@@ -35,7 +35,7 @@ const initialState = {
       'items.chassis.basic': { quantity: 1 },
       'items.chassis.advanced': { quantity: 1 },
       'items.chassis.prototype': { quantity: 1 },
-      'items.weapons.minigun': { quantity: 1 },
+      'items.weapons.minigun': { quantity: 2 },
     }
   },
   pilot: {
