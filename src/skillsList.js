@@ -34,6 +34,9 @@ export default function SkillsList() {
         <Link to={ `/vault` }>Vault</Link>
       </Menu.Item>
       <Menu.Item>
+        <Link to='/inventory'>Inventory</Link>
+      </Menu.Item>
+      <Menu.Item>
         <Link active={active === 'combat' ? 'active' : ''} to={ `/combat` }>Combat</Link>
       </Menu.Item>
       <Menu.Item>

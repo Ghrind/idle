@@ -8,4 +8,7 @@ export const gameData = {
     minDamage: 25,
     maxDamage: 50,
   },
+  slots: [
+    { type: 'chassis', name: 'Chassis', itemCode: null },
+  ],
 }

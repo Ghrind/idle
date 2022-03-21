@@ -31,7 +31,11 @@ const initialState = {
   vault: {
     money: 0,
     items: {
-      'items.strangetoken': { name: 'Strange Token', quantity: 2 }
+      'items.strangetoken': { name: 'Strange Token', quantity: 2 },
+      'items.chassis.basic': { quantity: 1 },
+      'items.chassis.advanced': { quantity: 1 },
+      'items.chassis.prototype': { quantity: 1 },
+
     }
   },
   pilot: {
@@ -44,6 +48,7 @@ const initialState = {
     maxDamage: makeStat(gameData.playerDefaultValues.maxDamage),
 
   },
+  slots: {},
   enemy: null,
   pilotActions: {
     active: '',

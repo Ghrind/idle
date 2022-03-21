@@ -37,3 +37,15 @@ export function sellItemFromVault(vault, itemCode, quantity) {
 
   vault.money += trueQuantitySold * itemData.price
 }
+
+export function itemsForSlot(vaultItems, slot) {
+  var items = []
+  const codes = Object.keys(vaultItems)
+  for (var i=0; i < codes.length; i++) {
+    const item = getItemData(codes[i])
+    if (item.slot === slot) {
+      items.push(item)
+    }
+  }
+  return items
+}

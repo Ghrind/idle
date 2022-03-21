@@ -13,6 +13,7 @@ import Mining from './routes/skills/mining'
 import Vault from './routes/vault'
 import Smelting from './routes/skills/smelting'
 import Manufacturing from './routes/skills/manufacturing'
+import Inventory from './routes/inventory'
 import Combat from './routes/combat'
 import './index.css'
 
@@ -27,6 +28,7 @@ ReactDOM.render(
             <Route path="skills/manufacturing" element={<Manufacturing />} />
             <Route path="combat" element={<Combat />} />
             <Route path="vault" element={<Vault />} />
+            <Route path="inventory" element={<Inventory />} />
           </Route>
         </Routes>
       </BrowserRouter>
