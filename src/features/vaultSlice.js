@@ -9,21 +9,26 @@ export const vaultActionsSlice = createSlice({
       sellItemFromVault(state.vault, action.payload.itemCode, action.payload.quantity)
     },
     equipItem: (state, action) => {
-      const item = getItemData(action.payload.itemCode)
+      const itemCode = action.payload.itemCode
       const slot = action.payload.slot
+      if (itemCode !== null) {
+        removeFromVault(state.vault, itemCode, 1)
+      }
 
-      removeFromVault(state.vault, item.code, 1)
       const otherItemCode = state.slots.items[slot]
-      if (otherItemCode !== undefined) {
+      if (otherItemCode !== undefined && otherItemCode !== null) {
         addToVault(state.vault, otherItemCode, 1)
         const otherItem = getItemData(otherItemCode)
         if (otherItem.slots !== undefined) {
           state.slots.active = state.slots.active.filter(slot => !otherItem.slots.includes(slot))
         }
       }
-      state.slots.items[slot] = item.code
-      if (item.slots !== undefined) {
-        state.slots.active = [...state.slots.active, ...item.slots]
+      state.slots.items[slot] = itemCode
+      if (itemCode !== null) {
+        var item = getItemData(itemCode)
+        if (item.slots !== undefined) {
+          state.slots.active = [...state.slots.active, ...item.slots]
+        }
       }
 
       // Remove items from inactive slots
@@ -32,7 +37,8 @@ export const vaultActionsSlice = createSlice({
         const itemCode = state.slots.items[key]
         const isSlotActive = state.slots.active.includes(key)
 
-        if (!isSlotActive) {
+        if (!isSlotActive && itemCode !== null) {
+          console.log('Removing item ' + itemCode + ' from inactive slot ' + key)
           addToVault(state.vault, itemCode, 1)
           state.slots.items[key] = null
         }

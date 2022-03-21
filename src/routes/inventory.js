@@ -12,12 +12,13 @@ function Slot(props) {
   const equippedItemCode = useSelector((state) => state.slots.items[props.type])
   const equippedItem = (equippedItemCode === null || equippedItemCode === undefined) ? undefined : getItemData(equippedItemCode)
   const label = (equippedItemCode === null || equippedItemCode === undefined) ? 'Equip' : 'Switch to'
-  const slotLabel = (equippedItemCode === null || equippedItemCode === undefined) ? props.name : equippedItem.name
+  const slotLabel = (equippedItemCode === null || equippedItemCode === undefined) ? '[' + props.name + ']' : equippedItem.name
 
   return (
     <Dropdown item text={ slotLabel }>
       <Dropdown.Menu>
         { itemsForSlot(vaultItems, props.type).map((item) => <Dropdown.Item key={item.code} onClick={() => switchTo(item.code)} text={`${label} ${item.name}`} />) }
+        { equippedItem !== undefined ? <Dropdown.Item key='unequip' onClick={() => switchTo(null)} text='Unequip' /> : ''}
       </Dropdown.Menu>
     </Dropdown>
   )
