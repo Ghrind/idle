@@ -13,11 +13,30 @@ export const vaultActionsSlice = createSlice({
       const slot = action.payload.slot
 
       removeFromVault(state.vault, item.code, 1)
-      const otherItemCode = state.slots[slot]
+      const otherItemCode = state.slots.items[slot]
       if (otherItemCode !== undefined) {
         addToVault(state.vault, otherItemCode, 1)
+        const otherItem = getItemData(otherItemCode)
+        if (otherItem.slots !== undefined) {
+          state.slots.active = state.slots.active.filter(slot => !otherItem.slots.includes(slot))
+        }
       }
-      state.slots[slot] = item.code
+      state.slots.items[slot] = item.code
+      if (item.slots !== undefined) {
+        state.slots.active = [...state.slots.active, ...item.slots]
+      }
+
+      // Remove items from inactive slots
+      for(var i=0; i < Object.keys(state.slots.items).length; i++) {
+        const key = Object.keys(state.slots.items)[i]
+        const itemCode = state.slots.items[key]
+        const isSlotActive = state.slots.active.includes(key)
+
+        if (!isSlotActive) {
+          addToVault(state.vault, itemCode, 1)
+          state.slots.items[key] = null
+        }
+      }
     },
   }
 })

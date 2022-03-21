@@ -8,7 +8,8 @@ export const gameData = {
     minDamage: 25,
     maxDamage: 50,
   },
-  slots: [
-    { type: 'chassis', name: 'Chassis', itemCode: null },
-  ],
+  slots: {
+    'chassis': { type: 'chassis', name: 'Chassis'},
+    'rangedWeapon1': { type: 'rangedWeapon1', name: 'Ranged Weapon 1'},
+  },
 }

@@ -9,7 +9,7 @@ function Slot(props) {
   const dispatch = useDispatch()
   const switchTo = (itemCode) => { dispatch(equipItem({ slot: props.type, itemCode: itemCode })) }
   const vaultItems = useSelector((state) => state.vault.items)
-  const equippedItemCode = useSelector((state) => state.slots[props.type])
+  const equippedItemCode = useSelector((state) => state.slots.items[props.type])
   const equippedItem = (equippedItemCode === null || equippedItemCode === undefined) ? undefined : getItemData(equippedItemCode)
   const label = (equippedItemCode === null || equippedItemCode === undefined) ? 'Equip' : 'Switch to'
   const slotLabel = (equippedItemCode === null || equippedItemCode === undefined) ? props.name : equippedItem.name
@@ -24,6 +24,8 @@ function Slot(props) {
 }
 
 export default function Inventory(props) {
+  const slots = useSelector((state) => state.slots.active).map((slot) =>  gameData.slots[slot])
+
   return (
     <main>
       <Header as='h1' attached='top'>
@@ -33,7 +35,7 @@ export default function Inventory(props) {
       </Header>
       <Segment attached>
         <Menu vertical>
-        { gameData.slots.map((slot) => <Slot key={slot.type} type={slot.type} name={slot.name} itemCode={slot.itemCode} />) }
+        { slots.map((slot) => <Slot key={slot.type} type={slot.type} name={slot.name} itemCode={slot.itemCode} />) }
         </Menu>
       </Segment>
     </main>
