@@ -8,7 +8,7 @@ export const CombatSlice = createSlice({
   reducers: {
     startCombat: (state, action) => {
       state.ticker.active = false
-      prepareForCombat(state, 'devourer')
+      prepareForCombat(state, action.payload.enemy)
       state.ticker.active = true
     },
     enemyAttack: (state, action) => {

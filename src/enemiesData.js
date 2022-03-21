@@ -1,13 +1,6 @@
-const enemiesData = {
-  'devourer': {
-    name: 'Devourer',
-    hp: 20,
-    accuracy: 50,
-    minDamage: 1,
-    maxDamage: 5,
-    evasion: 30,
-    xp: 20,
-  },
+export const enemiesData = {
+  'enemies.alien.devourer': { name:'Devourer', hp: 50, accuracy: 60, evasion: 50, minDamage: 1, maxDamage: 5, xp: 15 },
+  'enemies.bandit.rampager': { name:'Rampager', hp: 100, accuracy: 50, evasion: 40, minDamage: 2, maxDamage: 10, xp: 30 },
 }
 
 export function getEnemyData(enemyCode) {

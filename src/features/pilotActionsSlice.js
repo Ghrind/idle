@@ -78,7 +78,7 @@ export const pilotActionsSlice = createSlice({
 
           if (attackOutcome.targetStatus == 'dead') {
             state.ticker.active = false
-            prepareForCombat(state, 'devourer')
+            prepareForCombat(state, state.enemy.code)
             state.ticker.active = true
           }
         }

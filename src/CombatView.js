@@ -4,6 +4,7 @@ import { startCombat} from './features/combatSlice'
 import PilotActionProgress from './PilotActionProgress'
 import { stopAction } from './features/pilotActionsSlice'
 import { chanceToHit } from './gameMaths'
+import { enemiesData } from './enemiesData'
 
 function CombatStats(props) {
   const hasHp = props.actor.hp !== undefined
@@ -31,18 +32,32 @@ function CombatStats(props) {
   )
 }
 
+function CombatOption(props) {
+  const dispatch = useDispatch()
+  const handleStart = () => { dispatch(startCombat({ enemy: props.code })) }
+
+  return (
+    <Segment>
+      <p>{props.name}</p>
+      <Button onClick={handleStart}>Fight</Button>
+    </Segment>
+  )
+}
+
 export default function CombatView(props) {
   const pilot = useSelector((state) => state.pilot)
   const enemy = useSelector((state) => state.enemy)
   const dispatch = useDispatch()
-  const handleStart = () => { dispatch(startCombat({ enemy: 'devourer' })) }
   const handleStop = () => { dispatch(stopAction()) }
   const inCombat = useSelector((state) => state.skills.active) === 'combat'
+  const combatChoices = Object.entries(enemiesData).map(([key, value]) => <CombatOption name={value.name} code={key} />)
+
   return(
     <main>
       <CombatStats pilot actor={pilot} />
       { enemy === null ? '' : <CombatStats actor={enemy} target={pilot} /> }
-      { inCombat ? <Button onClick={handleStop}>Stop</Button> : <Button onClick={handleStart}>Start</Button> }
+      { inCombat ? <Button onClick={handleStop}>Stop</Button> : '' }
+      { combatChoices }
     </main>
   )
 }

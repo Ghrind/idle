@@ -29,6 +29,7 @@ export function prepareForCombat(state, enemyCode) {
 
   // Enemy
   state.enemy = {}
+  state.enemy.code = enemyCode
   state.enemy.name = enemyData.name
   state.enemy.hp = { base: enemyData.hp, max: enemyData.hp, current: enemyData.hp }
   state.enemy.accuracy = { base: enemyData.accuracy, max: enemyData.accuracy, current: enemyData.accuracy }
