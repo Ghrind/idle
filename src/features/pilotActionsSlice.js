@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { addToInventory, removeFromInventory } from '../inventoryUtils'
+import { addToVault, removeFromVault } from '../vaultUtils'
 import { updateSkillLevel, stopTraining } from '../skillsUtils'
 import { itemsData } from '../itemsData'
 import { getPilotActionData } from '../pilotActionsData'
@@ -52,7 +52,7 @@ export const pilotActionsSlice = createSlice({
             const itemCode = pilotAction.outputItems[i].code
             const quantity = pilotAction.outputItems[i].quantity
 
-            addToInventory(state.inventory, itemCode, quantity)
+            addToVault(state.vault, itemCode, quantity)
           }
         }
 
@@ -62,7 +62,7 @@ export const pilotActionsSlice = createSlice({
             const itemCode = pilotAction.inputItems[i].code
             const quantity = pilotAction.inputItems[i].quantity
 
-            removeFromInventory(state.inventory, itemCode, quantity)
+            removeFromVault(state.vault, itemCode, quantity)
           }
         }
 
@@ -96,9 +96,9 @@ function canPerformAction(state, pilotAction) {
     for (var i = 0; i < pilotAction.inputItems.length; i++) {
       const itemCode = pilotAction.inputItems[i].code
       const requiredQuantity = pilotAction.inputItems[i].quantity
-      const quantityInInventory = state.inventory.items[itemCode] !== undefined ? state.inventory.items[itemCode].quantity : 0
+      const quantityInVault = state.vault.items[itemCode] !== undefined ? state.vault.items[itemCode].quantity : 0
 
-      if (requiredQuantity > quantityInInventory) {
+      if (requiredQuantity > quantityInVault) {
         stopTraining(state, pilotAction.name + ': Not enough ' + itemsData[itemCode].name)
         return false
       }

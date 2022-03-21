@@ -2,7 +2,7 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import reduceReducers from 'reduce-reducers';
 import tickerReducer from './features/tickerSlice'
 import pilotActionsReducer from './features/pilotActionsSlice'
-import inventoryReducer from './features/inventorySlice'
+import vaultReducer from './features/vaultSlice'
 import { skillsInitialLevels, skillsInitialXP } from './skillsUtils'
 import combatReducer from './features/combatSlice'
 import { gameData } from './gameData'
@@ -28,7 +28,7 @@ const initialState = {
     },
     xpPerAction: 0,
   },
-  inventory: {
+  vault: {
     money: 0,
     items: {
       'items.strangetoken': { name: 'Strange Token', quantity: 2 }
@@ -50,7 +50,7 @@ const initialState = {
   }
 }
 
-const reducer = reduceReducers(initialState, tickerReducer, pilotActionsReducer, inventoryReducer, combatReducer)
+const reducer = reduceReducers(initialState, tickerReducer, pilotActionsReducer, vaultReducer, combatReducer)
 
 const store = configureStore({
   reducer: reducer,

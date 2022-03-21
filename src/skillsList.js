@@ -25,12 +25,12 @@ export function SkillsListEntry(props) {
 export default function SkillsList() {
   const listItems = Object.entries(skillsData).map(([key, value]) => <SkillsListEntry key={key} skill={key} name={value.name} />)
   const active = useSelector((state) => state.skills.active)
-  const inventorySlotsCount = Object.keys(useSelector((state) => state.inventory.items)).length
+  const vaultSlotsCount = Object.keys(useSelector((state) => state.vault.items)).length
 
   return (
     <Menu vertical>
       <Menu.Item>
-        <Label>{inventorySlotsCount}</Label>
+        <Label>{vaultSlotsCount}</Label>
         <Link to={ `/vault` }>Vault</Link>
       </Menu.Item>
       <Menu.Item>
