@@ -3,7 +3,7 @@ import { Segment, Progress, Label, Container, Header, List, Button } from 'seman
 import { startCombat} from './features/combatSlice'
 import PilotActionProgress from './PilotActionProgress'
 import { stopAction } from './features/pilotActionsSlice'
-import { chanceToHit } from './gameMaths'
+import { chanceToHit, evasionChance } from './gameMaths'
 import { enemiesData } from './enemiesData'
 
 function CombatStats(props) {
@@ -22,8 +22,8 @@ function CombatStats(props) {
         <List>
           { hasShield ? <List.Item>Shield: {props.actor.shield.current}/{props.actor.shield.max}</List.Item> : '' }
           { hasHp ? <List.Item>HP: {props.actor.hp.current}/{props.actor.hp.max}</List.Item> : '' }
-          <List.Item>Accuracy (melee/rampage): {props.actor.accuracy.current} ({props.target === undefined ? '' : chanceToHit(props.actor.accuracy.current, props.target.evasion.current)})</List.Item>
-          <List.Item>Evasion: {props.actor.evasion.current}</List.Item>
+          <List.Item>Accuracy (melee/rampage): {props.actor.accuracy.current} {props.target === undefined ? '' : <span>({chanceToHit(props.actor.accuracy.current, props.target.evasion.current)}%)</span>}</List.Item>
+          <List.Item>Evasion: {props.actor.evasion.current} {props.target === undefined ? '' : <span>({ evasionChance(props.target.accuracy.current, props.actor.evasion.current)}%)</span>}</List.Item>
           <List.Item>Damage: {props.actor.minDamage.current}-{props.actor.maxDamage.current}</List.Item>
         </List>
       </Container>

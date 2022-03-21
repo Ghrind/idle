@@ -1,3 +1,7 @@
 export function chanceToHit(attackRating, defenseRating) {
-  return attackRating / (attackRating + defenseRating) * 100
+  return Math.floor(attackRating / (attackRating + defenseRating) * 100)
+}
+
+export function evasionChance(attackRating, defenseRating) {
+  return 100 - chanceToHit(attackRating, defenseRating)
 }
