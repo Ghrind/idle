@@ -1,4 +1,5 @@
 export const gameData = {
+  maxSimilarSlots: 2,
   shieldPercentageAfterDeath: 30,
   playerDefaultValues: {
     shield: 1000,

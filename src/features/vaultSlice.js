@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { sellItemFromVault, removeFromVault, addToVault } from '../vaultUtils'
+import { sellItemFromVault, equipItemInSlot, slotIsFree } from '../vaultUtils'
 import { getItemData } from '../itemsData'
+import { gameData } from '../gameData'
 
 export const vaultActionsSlice = createSlice({
   name: 'vaultActions',
@@ -11,42 +12,30 @@ export const vaultActionsSlice = createSlice({
     equipItem: (state, action) => {
       const itemCode = action.payload.itemCode
       const slot = action.payload.slot
-      if (itemCode !== null) {
-        removeFromVault(state.vault, itemCode, 1)
+
+      equipItemInSlot(state.vault, state.slots, itemCode, slot)
+    },
+    freeEquipItem: (state, action) => {
+      const itemCode = action.payload.itemCode
+      const item = getItemData(itemCode)
+      const slot = item.slot
+
+      if (slotIsFree(state.slots, slot)) {
+        equipItemInSlot(state.vault, state.slots, itemCode, slot)
+        return
       }
 
-      const otherItemCode = state.slots.items[slot]
-      if (otherItemCode !== undefined && otherItemCode !== null) {
-        addToVault(state.vault, otherItemCode, 1)
-        const otherItem = getItemData(otherItemCode)
-        if (otherItem.slots !== undefined) {
-          state.slots.active = state.slots.active.filter(slot => !otherItem.slots.includes(slot))
-        }
-      }
-      state.slots.items[slot] = itemCode
-      if (itemCode !== null) {
-        var item = getItemData(itemCode)
-        if (item.slots !== undefined) {
-          state.slots.active = [...state.slots.active, ...item.slots]
+      for (var i=1; i <= gameData.maxSimilarSlots; i++) {
+        if (slotIsFree(state.slots, slot + i)) {
+          equipItemInSlot(state.vault, state.slots, itemCode, slot + i)
+          return
         }
       }
 
-      // Remove items from inactive slots
-      for(var i=0; i < Object.keys(state.slots.items).length; i++) {
-        const key = Object.keys(state.slots.items)[i]
-        const itemCode = state.slots.items[key]
-        const isSlotActive = state.slots.active.includes(key)
-
-        if (!isSlotActive && itemCode !== null) {
-          console.log('Removing item ' + itemCode + ' from inactive slot ' + key)
-          addToVault(state.vault, itemCode, 1)
-          state.slots.items[key] = null
-        }
-      }
     },
   }
 })
 
-export const { sellItem, equipItem } = vaultActionsSlice.actions
+export const { sellItem, equipItem, freeEquipItem } = vaultActionsSlice.actions
 
 export default vaultActionsSlice.reducer

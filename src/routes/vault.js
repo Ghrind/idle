@@ -3,18 +3,25 @@ import { List, Header, Label, Segment } from 'semantic-ui-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Menu, Dropdown } from 'semantic-ui-react'
 import { itemsData, getItemData } from '../itemsData'
-import { sellItem } from '../features/vaultSlice'
+import { sellItem, equipItem, freeEquipItem } from '../features/vaultSlice'
+import { slotType, anySlotFree } from '../vaultUtils'
 
 export function VaultEntry(props) {
-  const name = getItemData(props.code).name
+  const item = getItemData(props.code)
   const price = props.quantity * itemsData[props.code].price
   const dispatch = useDispatch()
-  const sell =  () => { dispatch(sellItem({ itemCode: props.code, quantity: props.quantity })) }
+  const sell = () => { dispatch(sellItem({ itemCode: props.code, quantity: props.quantity })) }
+  const freeEquipOK = anySlotFree(useSelector((state) => state.slots), item.slot)
+  const equipReplaceItems = Object.entries(useSelector((state) => state.slots.items)).filter(([key, value]) => { return slotType(key) === item.slot && value !== null })
+  const equipInSlot = (slot, itemCode) => { dispatch(equipItem({ itemCode: itemCode, slot: slot })) }
+  const freeEquip = (itemCode) => { dispatch(freeEquipItem({ itemCode: itemCode })) }
 
   return (
-    <Dropdown item text={`${name} (${props.quantity})`}>
+    <Dropdown item text={`${item.name} (${props.quantity})`}>
       <Dropdown.Menu>
         <Dropdown.Item onClick={sell} text={`Sell All (${price}$)`} /> 
+        { freeEquipOK ? <Dropdown.Item onClick={() => freeEquip(item.code)} text='Equip' /> : '' }
+        { equipReplaceItems.map(([key, otherItem]) => <Dropdown.Item onClick={() => equipInSlot(key, item.code)} text={`Replace ${getItemData(otherItem).name}`} />) }
       </Dropdown.Menu>
     </Dropdown>
   );

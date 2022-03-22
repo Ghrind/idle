@@ -1,4 +1,5 @@
 import { itemsData, getItemData } from './itemsData'
+import { gameData } from './gameData'
 
 export function addToVault(vault, itemCode, quantity) {
   if (quantity > 0) {
@@ -52,4 +53,56 @@ export function itemsForSlot(vaultItems, slot) {
 
 export function slotType(slotCode) {
   return slotCode.replace(/[1-9]$/, '')
+}
+
+export function equipItemInSlot(vault, slots, itemCode, slot) {
+  if (itemCode !== null) {
+    removeFromVault(vault, itemCode, 1)
+  }
+
+  const otherItemCode = slots.items[slot]
+  if (otherItemCode !== undefined && otherItemCode !== null) {
+    addToVault(vault, otherItemCode, 1)
+    const otherItem = getItemData(otherItemCode)
+    if (otherItem.slots !== undefined) {
+      slots.active = slots.active.filter(slot => !otherItem.slots.includes(slot))
+    }
+  }
+  slots.items[slot] = itemCode
+  if (itemCode !== null) {
+    var item = getItemData(itemCode)
+    if (item.slots !== undefined) {
+      slots.active = [...slots.active, ...item.slots]
+    }
+  }
+
+  // Remove items from inactive slots
+  for(var i=0; i < Object.keys(slots.items).length; i++) {
+    const key = Object.keys(slots.items)[i]
+    const itemCode = slots.items[key]
+    const isSlotActive = slots.active.includes(key)
+
+    if (!isSlotActive && itemCode !== null) {
+      console.log('Removing item ' + itemCode + ' from inactive slot ' + key)
+      addToVault(vault, itemCode, 1)
+      slots.items[key] = null
+    }
+  }
+}
+
+export function slotIsFree(slots, slot) {
+  return slots.active.includes(slot) && (slots.items[slot] === undefined || slots.items[slot] === null)
+}
+
+export function anySlotFree(slots, slot) {
+  if (slotIsFree(slots, slot)) {
+    return true
+  }
+
+  for (var i=1; i <= gameData.maxSimilarSlots; i++) {
+    if (slotIsFree(slots, slot + i)) {
+      return true
+    }
+  }
+  return false
 }
